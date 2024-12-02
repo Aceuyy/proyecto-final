@@ -51,5 +51,5 @@ def eliminar(numero_de_cuenta):
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Crear la base de datos si no existe
+        db.create_all()  
     app.run(debug=True)
