@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Alumnos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Registro de Alumnos</h1>
+        </header>
+
+        <!-- Formulario para agregar alumnos -->
+        <section class="form-section">
+            <h2>Agregar Alumno</h2>
+            <form action="/agregar" method="POST" class="form">
+                <div class="form-group">
+                    <label for="numero_de_cuenta">Número de cuenta:</label>
+                    <input type="text" id="numero_de_cuenta" name="numero_de_cuenta" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="grupo">Grupo:</label>
+                    <input type="text" id="grupo" name="grupo" required>
+                </div>
+                <div class="form-group">
+                    <label for="grado">Grado:</label>
+                    <input type="text" id="grado" name="grado" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Agregar Alumno</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Tabla de alumnos registrados -->
+        <section class="table-section">
+            <h2>Alumnos Registrados</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Número de Cuenta</th>
+                        <th>Nombre</th>
+                        <th>Grupo</th>
+                        <th>Grado</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for alumno in alumnos %}
+                    <tr>
+                        <td>{{ alumno.numero_de_cuenta }}</td>
+                        <td>{{ alumno.nombre }}</td>
+                        <td>{{ alumno.grupo }}</td>
+                        <td>{{ alumno.grado }}</td>
+                        <td>{{ alumno.email }}</td>
+                        <td>
+                            <!-- Botón para eliminar -->
+                            <form action="/eliminar/{{ alumno.numero_de_cuenta }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+</html>
